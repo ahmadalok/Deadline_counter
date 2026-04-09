@@ -37,7 +37,7 @@ function startCountdown(dateString) {
   countdown = setInterval(function() {
 
     const now = new Date()
-    const deadline = new Date(dateString,'T00:00:00')
+    const deadline = new Date(dateString + 'T00:00:00')
     const diff = deadline - now
 
     if (diff <= 0) {

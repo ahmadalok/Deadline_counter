@@ -106,3 +106,15 @@ button:hover {
   font-size: 1.2rem;
   color: #888;
 }
+.reset-btn {
+  margin-top: 30px;
+  background-color: transparent;
+  color: #ff4757;
+  border: 2px solid #ff4757;
+  display: none;
+}
+
+.reset-btn:hover {
+  background-color: #ff4757;
+  color: white;
+}
