@@ -1,4 +1,5 @@
 const setBtn = document.getElementById('set-btn')
+const resetBtn = document.getElementById('reset-btn')
 const projectNameInput = document.getElementById('project-name')
 const deadlineDateInput = document.getElementById('deadline-date')
 const projectTitle = document.getElementById('project-title')
@@ -27,6 +28,7 @@ setBtn.addEventListener('click', function() {
   }
 
   startCountdown(deadlineDate)
+  resetBtn.style.display = 'block'
 
 })
 
@@ -45,6 +47,7 @@ function startCountdown(dateString) {
       minutesEl.textContent = '0'
       secondsEl.textContent = '0'
       messageEl.textContent = '💀 Deadline has passed!'
+      resetBtn.style.display = 'block'
       return
     }
 
@@ -63,3 +66,21 @@ function startCountdown(dateString) {
   }, 1000)
 
 }
+
+resetBtn.addEventListener('click', function() {
+
+  clearInterval(countdown)
+
+  projectTitle.textContent = ''
+  daysEl.textContent = '0'
+  hoursEl.textContent = '0'
+  minutesEl.textContent = '0'
+  secondsEl.textContent = '0'
+  messageEl.textContent = ''
+
+  projectNameInput.value = ''
+  deadlineDateInput.value = ''
+
+  resetBtn.style.display = 'none'
+
+})
