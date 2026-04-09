@@ -11,35 +11,16 @@ const messageEl = document.getElementById('message')
 
 let countdown
 
-setBtn.addEventListener('click', function() {
-
-  const projectName = projectNameInput.value
-  const deadlineDate = deadlineDateInput.value
-
-  if (projectName === '' || deadlineDate === '') {
-    alert('Please fill in both fields!')
-    return
-  }
-
-  projectTitle.textContent = '🔥 ' + projectName
-
-  if (countdown) {
-    clearInterval(countdown)
-  }
-
-  startCountdown(deadlineDate)
-  resetBtn.style.display = 'block'
-
-})
-
 function startCountdown(dateString) {
+  const parts = dateString.split('-')
+  const year = parseInt(parts[0], 10)
+  const month = parseInt(parts[1], 10) - 1
+  const day = parseInt(parts[2], 10)
+  const deadline = new Date(year, month, day)
 
   countdown = setInterval(function() {
-
     const now = new Date()
-    const parts = dateString.split('-')
-    const deadline = new Date(parts[0], parts[1] - 1, parts[2])
-    const diff = deadline - now
+    const diff = deadline.getTime() - now.getTime()
 
     if (diff <= 0) {
       clearInterval(countdown)
@@ -61,15 +42,31 @@ function startCountdown(dateString) {
     hoursEl.textContent = hours
     minutesEl.textContent = minutes
     secondsEl.textContent = seconds
-
     messageEl.textContent = ''
 
   }, 1000)
-
 }
 
-resetBtn.addEventListener('click', function() {
+setBtn.addEventListener('click', function() {
+  const projectName = projectNameInput.value
+  const deadlineDate = deadlineDateInput.value
 
+  if (projectName === '' || deadlineDate === '') {
+    alert('Please fill in both fields!')
+    return
+  }
+
+  projectTitle.textContent = '🔥 ' + projectName
+
+  if (countdown) {
+    clearInterval(countdown)
+  }
+
+  startCountdown(deadlineDate)
+  resetBtn.style.display = 'block'
+})
+
+resetBtn.addEventListener('click', function() {
   clearInterval(countdown)
 
   projectTitle.textContent = ''
@@ -83,5 +80,4 @@ resetBtn.addEventListener('click', function() {
   deadlineDateInput.value = ''
 
   resetBtn.style.display = 'none'
-
 })
